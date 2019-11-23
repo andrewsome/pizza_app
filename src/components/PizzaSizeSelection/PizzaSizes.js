@@ -1,0 +1,20 @@
+export const PizzaSizes = {
+  large:{
+		src:'../../../../img/pizza.svg',
+		size:'20%',
+		alt:'pizza',
+		price:5,
+	},
+	reguler:{
+		src:'../../../../img/pizza.svg',
+		size:'15%',
+		alt:'pizza',
+		price:4,
+	},
+	small:{
+		src:'../../../../img/pizza.svg',
+		size:'10%',
+		alt:'pizza',
+		price:3,
+  }
+};
