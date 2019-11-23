@@ -82,7 +82,11 @@ class App extends React.Component {
     })
   }
 
-  handleToppingNumbersChange = (event, key, delta) => {
+  handleToppingOrder = (e, key) => {
+    this.handleToppingNumberChange(e, key, 1);
+  }
+
+  handleToppingNumberChange(event, key, delta) {
     if (event && event.preventDefault) {
       event.preventDefault();
     }
@@ -102,17 +106,34 @@ class App extends React.Component {
     });
   } 
 
+  handleIncreace = (e, key, numbers) => {
+    const { numbers: thisNumbers } = this.state.chosenToppings[key];
+    const finalNumbers = numbers + 1;
+    const delta = finalNumbers - thisNumbers;
+
+    this.handleToppingNumberChange(e, key, delta);
+  }
+
+  handleDecreace = (e, key, numbers) => {
+    const { numbers: thisNumbers } = this.state.chosenToppings[key];
+    const finalNumbers = numbers - 1;
+    const delta = finalNumbers - thisNumbers;
+
+    this.handleToppingNumberChange(e, key, delta);
+  }
+
   render() {
 
     return (
       <>
         <Info />
         <Size handleChosenSize={this.handleChosenSize} />
-        <ToppingOptions handleToppingNumbersChange={this.handleToppingNumbersChange} />
+        <ToppingOptions handleToppingOrder={this.handleToppingOrder} />
         <OrderSummery
           chosenSize={this.state.chosenSize}
           chosenToppings={this.state.chosenToppings}
-          handleToppingNumbersChange={this.handleToppingNumbersChange}
+          handleDecreace={this.handleDecreace}
+          handleIncreace={this.handleIncreace}
         />
       </>
     );
