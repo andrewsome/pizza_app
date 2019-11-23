@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Info from './components/CustomerInfoHandle'
 import Size from './components/PizzaSizeSelection/Sizes'
-import Topping from './components/ToppingSelection/ToppingOptions'
+import ToppingOptions from './components/ToppingSelection/ToppingOptions'
 import Price from './components/Price'
 import OrderSummery from './components/Summery/'
 
@@ -82,54 +82,45 @@ class App extends React.Component {
     })
   }
 
-  handleToppingOrder = (e, title) => {
-    Object.keys(this.state.chosenToppings).map(key => {
-      if (key === title) {
-        this.setState(prevState => {
-          return {
-            chosenToppings: {
-              ...prevState.chosenToppings,
-              [key]: {
-                ...prevState.chosenToppings[key],
-                numbers: prevState.chosenToppings[key].numbers + 1,
-              }
-            }
-          }
-        })
-      }
-    })
+  handleToppingOrder = (e, key) => {
+    this.handleToppingNumberChange(e, key, 1);
   }
 
+  handleToppingNumberChange(event, key, delta) {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
+
+    this.setState((prevState) => {
+      const { numbers } = this.state.chosenToppings[key];
+
+      return {
+        chosenToppings: {
+          ...prevState.chosenToppings,
+          [key]: {
+            ...prevState.chosenToppings[key],
+            numbers: numbers + delta,
+          },
+        },
+      };
+    });
+  } 
+
   handleIncreace = (e, key, numbers) => {
-    e.preventDefault();
-    this.setState(prevState => {
-      return {
-        chosenToppings: {
-          ...prevState.chosenToppings,
-          [key]: {
-            ...prevState.chosenToppings[key],
-            numbers: numbers + 1,
-          }
-        }
-      }
-    })
+    const { numbers: thisNumbers } = this.state.chosenToppings[key];
+    const finalNumbers = numbers + 1;
+    const delta = finalNumbers - thisNumbers;
+
+    this.handleToppingNumberChange(e, key, delta);
   }
+
   handleDecreace = (e, key, numbers) => {
-    e.preventDefault();
-    this.setState(prevState => {
-      return {
-        chosenToppings: {
-          ...prevState.chosenToppings,
-          [key]: {
-            ...prevState.chosenToppings[key],
-            numbers: numbers - 1,
-          }
-        }
-      }
-    })
+    const { numbers: thisNumbers } = this.state.chosenToppings[key];
+    const finalNumbers = numbers - 1;
+    const delta = finalNumbers - thisNumbers;
+
+    this.handleToppingNumberChange(e, key, delta);
   }
-  
-  
 
   render() {
 
@@ -137,7 +128,7 @@ class App extends React.Component {
       <>
         <Info />
         <Size handleChosenSize={this.handleChosenSize} />
-        <Topping handleToppingOrder={this.handleToppingOrder} />
+        <ToppingOptions handleToppingOrder={this.handleToppingOrder} />
         <OrderSummery
           chosenSize={this.state.chosenSize}
           chosenToppings={this.state.chosenToppings}
