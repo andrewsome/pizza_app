@@ -17,12 +17,18 @@ describe('<App />', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  describe('<Topping />', () => {
-    it('increase toppings numbers by 1 when calling handleToppingOrder', () => {
+  describe('handleToppingNumbersChange', () => {
+    let handleToppingNumbersChange;
+
+    beforeEach(() => {
+      ({ handleToppingNumbersChange } = wrapper.instance());
+    });
+
+    it('increase toppings numbers by delta', () => {
       const topping = 'bacon';
-
+      
       const currentNumbers = 3;
-
+      
       wrapper.setState({
         chosenToppings: {
           [topping]: {
@@ -31,19 +37,23 @@ describe('<App />', () => {
         },
       });
 
-      const { handleToppingOrder } = wrapper.find('ToppingOptions').props();
+      handleToppingNumbersChange(undefined, topping, 3);
 
-      handleToppingOrder(event, topping);
+      let numbers = currentNumbers;
 
-      const numbersAfterCallOnce = currentNumbers + 1;
-      expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbersAfterCallOnce);
+      numbers = numbers + 3;
+      expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbers);
 
-      const clickTimes = 5;
-      for (let i = 0; i < clickTimes; i ++) {
-        handleToppingOrder(event, topping);
-      }
+      handleToppingNumbersChange(undefined, topping, -1);
 
-      expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbersAfterCallOnce + clickTimes);
+      numbers = numbers - 1;
+      expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbers);
+    });
+  });
+
+  describe('<ToppingOptions />', () => {
+    it('passes handleToppingNumbersChange', () => {
+      expect(wrapper.find('ToppingOptions').props()).toHaveProperty('handleToppingNumbersChange', wrapper.instance().handleToppingNumbersChange);
     });
   });
 
@@ -69,24 +79,8 @@ describe('<App />', () => {
         expect(props).toHaveProperty('chosenToppings', wrapper.state().chosenToppings);
       });
 
-      it('increases topping numbers by 1 with given numbers when calling handleIncrease', () => {
-          const topping = 'bacon';
-          
-          const numbers = 2;
-
-          orderSummery.props().handleIncreace(event, topping, numbers);
-
-          expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbers + 1);
-      });
-
-      it('decreases topping numbers by 1 with given numbers when calling handleDecrease', () => {
-        const topping = 'bacon';
-        
-        const numbers = 2;
-
-        orderSummery.props().handleDecreace(event, topping, numbers);
-
-        expect(wrapper.state().chosenToppings[topping]).toHaveProperty('numbers', numbers - 1);
+      it('passes handleToppingNumbersChange', () => {
+        expect(props).toHaveProperty('handleToppingNumbersChange', wrapper.instance().handleToppingNumbersChange);
       });
     });
   });
