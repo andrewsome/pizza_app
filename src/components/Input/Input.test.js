@@ -5,16 +5,17 @@ import Input from './index'
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<Input />', () => {
+    const wrapper = shallow(<Input />);
+
     it('should contain an StyledInput', () => {
-        const wrapper = shallow(<Input />);
-        expect(wrapper.exists()).toBe(true);
+        expect(wrapper.find('StyledInput')).toHaveProperty('onChange', wrapper.instance().onChange);
     });
 });
 
 
 //先写测试 态度要好
 //unit test shallow test only test surface, must have , literly no cost
-//smae props get same beheavirer
+//same props get same beheavirer
 
 //stub mock
 

@@ -83,10 +83,10 @@ class App extends React.Component {
   }
 
   handleToppingOrder = (e, key) => {
-    this.handleToppingNumberChange(e, key, 1);
+    this.handleToppingNumbersChange(e, key, 1);
   }
 
-  handleToppingNumberChange(event, key, delta) {
+  handleToppingNumbersChange = (event, key, delta) => {
     if (event && event.preventDefault) {
       event.preventDefault();
     }
@@ -111,7 +111,7 @@ class App extends React.Component {
     const finalNumbers = numbers + 1;
     const delta = finalNumbers - thisNumbers;
 
-    this.handleToppingNumberChange(e, key, delta);
+    this.handleToppingNumbersChange(e, key, delta);
   }
 
   handleDecreace = (e, key, numbers) => {
@@ -119,7 +119,7 @@ class App extends React.Component {
     const finalNumbers = numbers - 1;
     const delta = finalNumbers - thisNumbers;
 
-    this.handleToppingNumberChange(e, key, delta);
+    this.handleToppingNumbersChange(e, key, delta);
   }
 
   render() {

@@ -14,7 +14,6 @@ const StyledDiv = styled.div`
 
 
 export default class ToppingOptions extends Component {
-
 	render() {
 
 		return (

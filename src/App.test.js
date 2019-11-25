@@ -2,10 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App'
 
-const event = {
-  preventDefault: () => {},
-};
-
 describe('<App />', () => {
   let wrapper;
 
@@ -53,7 +49,7 @@ describe('<App />', () => {
 
   describe('<ToppingOptions />', () => {
     it('passes handleToppingNumbersChange', () => {
-      expect(wrapper.find('ToppingOptions').props()).toHaveProperty('handleToppingNumbersChange', wrapper.instance().handleToppingNumbersChange);
+      expect(wrapper.find('ToppingOptions').props()).toHaveProperty('handleToppingOrder', wrapper.instance().handleToppingOrder);
     });
   });
 
@@ -79,8 +75,12 @@ describe('<App />', () => {
         expect(props).toHaveProperty('chosenToppings', wrapper.state().chosenToppings);
       });
 
-      it('passes handleToppingNumbersChange', () => {
-        expect(props).toHaveProperty('handleToppingNumbersChange', wrapper.instance().handleToppingNumbersChange);
+      it('passes handleIncreace', () => {
+        expect(props).toHaveProperty('handleIncreace', wrapper.instance().handleIncreace);
+      });
+
+      it('passes handleDecreace', () => {
+        expect(props).toHaveProperty('handleDecreace', wrapper.instance().handleDecreace);
       });
     });
   });
