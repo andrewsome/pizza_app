@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
 	margin: 1rem auto;
 `;
 
-const StyledImage = styled.img`
+export const StyledImage = styled.img`
 	border-radius: 50%;
 	&:hover{
 		cursor: pointer;

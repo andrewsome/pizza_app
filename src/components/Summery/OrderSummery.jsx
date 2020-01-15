@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Container from '../../Layout/Container'
 import Header from '../Header'
 import styled from 'styled-components'
-import OrderModify from './OrderModify'
+import NP from 'number-precision';
 
 const StyledDiv = styled.div`
   font-size:3rem;
@@ -22,63 +22,73 @@ const StyledButton = styled.button`
 `;
 
 export default class OrderSummery extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
       sizeOrdered: this.props.chosenSize,
+      totalPrice: 0,
     }
   }
-  
+
   static getDerivedStateFromProps(props, state) {
-      return {
-        sizeOrdered: props.chosenSize,
-      };
+    return {
+      sizeOrdered: props.chosenSize,
+    };
   }
 
+  // CalculateTotal = (numbers, singlePrice) => {
+  //   const { totalPrice } = this.state;
+  //   this.setState({
+  //     totalPrice: NP.plus(totalPrice, NP.times(numbers, singlePrice)),
+  //   })
+  // }
+
   render() {
+    // const { totalPrice } = this.state;
     const { chosenToppings } = this.props;
     const { size, price } = this.state.sizeOrdered;
     return (
       <Container>
         <Header>Order Summery</Header>
-          <StyledDiv>
-            <StyledList>
-              <StyledDiv>
-                {size !==''? `you ordered ${size} size base` :''} 
-              </StyledDiv>
-              <StyledDiv>
-                {price !==''? `$ ${price}`:''}
-              </StyledDiv>
-            </StyledList>
-          </StyledDiv>
-          {Object.keys(chosenToppings).map((key) => {
-            const { numbers, singlePrice } = chosenToppings[key]
-              return(
-               
-                <StyledList key={key} numbers={numbers} >
-                   {numbers>0?
-                   <>
+        <StyledDiv>
+          <StyledList>
+            <StyledDiv>
+              {size !== '' ? `you ordered ${size} size base` : ''}
+            </StyledDiv>
+            <StyledDiv>
+              {price !== '' ? `$ ${price}` : ''}
+            </StyledDiv>
+          </StyledList>
+        </StyledDiv>
+        {Object.keys(chosenToppings).map((key) => {
+          const { numbers, singlePrice } = chosenToppings[key];
+          return (
+
+            <StyledList key={key} numbers={numbers} >
+              {numbers > 0 ?
+                <>
                   <StyledDiv >
-                  {key}
+                    {key}
                   </StyledDiv>
                   <StyledDiv>
-                      <StyledButton 
-                      onClick={(e)=>this.props.handleDecreace(e,key,numbers)}>-</StyledButton>
-                      {` ${numbers} `}
-                      <StyledButton 
-                      onClick={(e)=>this.props.handleIncreace(e,key,numbers)}>+</StyledButton>
+                    <StyledButton
+                      onClick={(e) => this.props.handleDecreace(e, key, numbers)}>-</StyledButton>
+                    {` ${numbers} `}
+                    <StyledButton
+                      onClick={(e) => this.props.handleIncreace(e, key, numbers)}>+</StyledButton>
                   </StyledDiv>
                   <StyledDiv>
-                  {`$ ${numbers * singlePrice}`}
+                    {`$ ${NP.times(numbers, singlePrice)}`} 
+                    {/* {this.CalculateTotal(numbers,singlePrice)} */}
                   </StyledDiv>
-                  </>
-                  :''}
-                </StyledList>
-                
-              )
-            })
-          }
+                </>
+                : ''}
+            </StyledList>
+
+          )
+        })
+        }        
       </Container>
     )
   }

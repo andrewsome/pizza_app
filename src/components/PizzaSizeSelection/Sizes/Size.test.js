@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Size from './Size'
+import Size,{StyledImage} from './Size'
 
 
 describe('<Size />', () => {  
@@ -11,21 +11,7 @@ describe('<Size />', () => {
   });
 
   it('renders three <StyledImage /> Components', () => {
-    console.log(wrapper.instance().width)
 
-    expect(wrapper.find('StyledImage')).toHaveProperty('width', wrapper.instance().height);
+    expect(wrapper.find(StyledImage).first().props()).toHaveProperty('width','20%');
   });
-
-  it('renders three <StyledImage /> Components', () => {
-    console.log(wrapper.instance().height)
-    console.log('worked')
-    expect(wrapper.find('StyledImage')).toHaveProperty('height', wrapper.instance().height);
-  });
-
-  it('renders three <StyledImage /> Components', () => {
-    console.log(wrapper.instance().onClick)
-
-    expect(wrapper.find('StyledImage')).toHaveProperty('onClick', wrapper.instance().onClick);
-  });
-
 });

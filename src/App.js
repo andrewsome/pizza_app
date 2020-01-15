@@ -3,7 +3,6 @@ import './App.css';
 import Info from './components/CustomerInfoHandle'
 import Size from './components/PizzaSizeSelection/Sizes'
 import ToppingOptions from './components/ToppingSelection/ToppingOptions'
-import Price from './components/Price'
 import OrderSummery from './components/Summery/'
 
 class App extends React.Component {
@@ -18,51 +17,51 @@ class App extends React.Component {
       chosenToppings: {
         anchovy: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:2,
         },
         bacon: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:1.5,
         },
         basil: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:1.2,
         },
         chili: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.1,
         },
         mozzarella: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.21,
         },
         mushroom: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.41,
         },
         olive: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.51,
         },
         onion: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.61,
         },
         pepper: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.91,
         },
         pepperoni: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.81,
         },
         prawn: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:.71,
         },
         sweetcorn: {
           numbers: 0,
-          singlePrice:1,
+          singlePrice:1.1,
         },
         tomato: {
           numbers: 0,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
 	display: flex;
 	width: 24%;
   margin: 0.2rem .2rem;
@@ -11,14 +11,14 @@ const StyledButton = styled.button`
 }
 `;
 
-const StyledImg = styled.img`
+export const StyledImg = styled.img`
 	width:30%;
 	height:3rem;
 	background:grey;
 	pointer-events: none;
 `;
 
-const ButtonTitle = styled.div`
+export const ButtonTitle = styled.div`
 	width: 70%;
 	text-align: center;
   font-size:2rem;

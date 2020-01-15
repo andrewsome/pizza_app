@@ -48,7 +48,7 @@ describe('<App />', () => {
   });
 
   describe('<ToppingOptions />', () => {
-    it('passes handleToppingNumbersChange', () => {
+    it('passes handleToppingOrder', () => {
       expect(wrapper.find('ToppingOptions').props()).toHaveProperty('handleToppingOrder', wrapper.instance().handleToppingOrder);
     });
   });

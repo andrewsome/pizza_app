@@ -1,13 +1,11 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import CustomerInfo from './CustomerInfo'
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('<CustomerInfo />', () => {
-	it('should contain an StyledInput', () => {
+	it('renders children when passed in', () => {
 		const wrapper = shallow(<CustomerInfo />);
-		expect(wrapper.contains('Customer Infomation')).toBe(true);
+		expect(wrapper.find('Input').length).toBe(6);
 	});
 });
 
